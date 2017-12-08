@@ -70,10 +70,10 @@ def nearest_neighbor(data):
     knnTrainNoSmoke.fit(X_train2, y_train2)
     knnTrainNoSmokePred = knnTrainNoSmoke.predict(X_test2)
 
-    print("% mislabeled via K Nearest Neighbors with smoking questions and no training set = " + (str(float((y != knnNoTrainSmokePred).sum())/float(X.shape[0]))))
-    print("% mislabeled via K Nearest Neighbors with smoking questions = " + (str(float((y_test != knnTrainSmokePred).sum())/float(X_test.shape[0]))))
-    print("% mislabeled via K Nearest Neighbors without smoking questions= " + (str(float((y_test2 != knnTrainNoSmokePred).sum())/float(X_train2.shape[0]))))
-    print("% mislabeled via K Nearest Neighbors without smoking questions and no training set = " + (str(float((y2 != KnnNoTrainNoSmokePred).sum())/float(X2.shape[0]))))
+    print("The K Nearest Neighbors accuracy with smoking questions and no training set = " + (str(1-float((y != knnNoTrainSmokePred).sum())/float(X.shape[0]))))
+    print("The K Nearest Neighbors accuracy with smoking questions = " + (str(1-float((y_test != knnTrainSmokePred).sum())/float(X_test.shape[0]))))
+    print("The K Nearest Neighbors accuracy without smoking questions= " + (str(1-float((y_test2 != knnTrainNoSmokePred).sum())/float(X_train2.shape[0]))))
+    print("The K Nearest Neighbors accuracy without smoking questions and no training set = " + (str(1-float((y2 != KnnNoTrainNoSmokePred).sum())/float(X2.shape[0]))))
 
     return 
 
@@ -106,10 +106,10 @@ def naiveBayes(data):
 
     #do with and without smoking
     #print("Number of mislabeled points in training data out of a total %d points : %d" % (X_train.shape[0],(y_train != y_pred).sum()))
-    print("% mislabeled via Bayes with smoking questions and no training set = " + (str(float((y != y_predNoTrain).sum())/float(X.shape[0]))))
-    print("% mislabeled via Bayes with smoking questions = " + (str(float((y_test != finalTest).sum())/float(X_test.shape[0]))))
-    print("% mislabeled via Bayes without smoking questions= " + (str(float((y_test2 != finalTest2).sum())/float(X_test2.shape[0]))))
-    print("% mislabeled via Bayes without smoking questions and no training set = " + (str(float((y2 != y_predNoTrain2).sum())/float(X2.shape[0]))))
+    print("The Bayes accuracy with smoking questions and no training set = " + (str(1-float((y != y_predNoTrain).sum())/float(X.shape[0]))))
+    print("The Bayes accuracy with smoking questions = " + (str(1-float((y_test != finalTest).sum())/float(X_test.shape[0]))))
+    print("The Bayes accuracy without smoking questions= " + (str(1-float((y_test2 != finalTest2).sum())/float(X_test2.shape[0]))))
+    print("The Bayes accuracy without smoking questions and no training set = " + (str(1-float((y2 != y_predNoTrain2).sum())/float(X2.shape[0]))))
 
 
     return 
@@ -119,7 +119,7 @@ smoker = data['Smoking']
 data.head()
 
 data.shape
-print data.shape
+print ("There are " + str(data.shape[0]) + " respondants and " + str(data.shape[1]) + " factors being tested total")
 
 #print smoker
 smokerCount = 0 
@@ -129,6 +129,6 @@ for person in smoker[2:]:
 
 print "The total number of smokers is " + str(smokerCount)
 
+bayesSuccess = naiveBayes(data)
 logisticSuccess = logistic_regression(data)
 neighborSuccess = nearest_neighbor(data)
-bayesSuccess = naiveBayes(data)
